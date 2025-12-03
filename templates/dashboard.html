@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Comercial Ganadera - Dashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Comercial Ganadera</h1>
+        <p class="lead">Venta informativa de ganados bovinos — Consulte para más información</p>
+    </header>
+
+    {% if mensaje %}
+    <div class="mensaje">{{ mensaje }}</div>
+    {% endif %}
+
+    <section class="lotes">
+        {% for lote in lotes %}
+        <article class="lote">
+            <img src="{{ lote.imagen }}?w=800&q=60" alt="{{ lote.tipo }}">
+            <div class="lote-info">
+                <h2>{{ lote.titulo }}</h2>
+                <p class="desc">{{ lote.descripcion }}</p>
+                <p><strong>Cantidad:</strong> {{ lote.cantidad }}</p>
+                <p class="precio"><strong>Precio informativo:</strong> {{ lote.precio }}</p>
+                <a class="btn" href="#formulario">Pedir más info</a>
+            </div>
+        </article>
+        {% endfor %}
+    </section>
+
+    <section id="formulario" class="contacto">
+        <h2>Solicitar más información</h2>
+        <form action="{{ url_for('contacto') }}" method="post" class="form">
+            <div class="fila">
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="text" name="apellido" placeholder="Apellido" required>
+            </div>
+            <div class="fila">
+                <input type="email" name="correo" placeholder="Correo" required>
+                <input type="tel" name="cel" placeholder="Celular" required>
+            </div>
+            <div class="fila">
+                <label>Horario preferido para llamar:</label>
+                <input type="text" name="horario" placeholder="Ej: Mañana 9-12" required>
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+        <p class="nota">Nota: solo se guardan estos datos en la base de datos. No se envían notificaciones aún.</p>
+    </section>
+
+    <footer class="site-footer">
+        <p>Accesible en la IP del equipo en el puerto 5000</p>
+    </footer>
+</body>
+</html>

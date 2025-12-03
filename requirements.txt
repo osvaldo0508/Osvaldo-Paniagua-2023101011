@@ -1,0 +1,13 @@
+#pip install -r requirements.txt
+flask
+mysql-connector
+
+
+docker run -d --name EXAMEN -e MYSQL_ROOT_PASSWORD=admin123 -p 3308:3306 mysql:8
+
+CREATE TABLE Suscripcion (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    correo VARCHAR(150) NOT NULL UNIQUE
+);
